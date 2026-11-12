@@ -1,63 +1,82 @@
-// ① 기본 — 원의 넓이 구하기
-function circleArea(r) {
-    return Math.PI * r * r;
-}
 
-console.log("① 원의 넓이:", circleArea(5).toFixed(2));
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript 실습 문제</title>
+</head>
+<body>
+    <h1>JavaScript 실습 결과</h1>
+    <pre id="result"></pre>
 
+    <script>
+        let output = "";
 
-// ② 기본 — 60점 이상 점수와 평균 구하기
-let scores = [95, 42, 88, 67, 55];
+        // ① 기본 — 원의 넓이 구하기
+        function circleArea(r) {
+            return Math.PI * r * r;
+        }
 
-let passed = scores.filter(score => score >= 60);
-
-let count = passed.length;
-let average = passed.reduce((sum, score) => sum + score, 0) / count;
-
-console.log("② 60점 이상 점수:", passed);
-console.log("60점 이상 인원수:", count);
-console.log("평균:", average);
-
-
-// ③ 응용 — 1학년 학생 이름 출력하기
-let students = [
-    { name: "김철수", grade: 1, score: 90 },
-    { name: "이영희", grade: 2, score: 85 },
-    { name: "박민수", grade: 1, score: 95 },
-    { name: "최유진", grade: 3, score: 80 }
-];
-
-let firstGrade = students
-    .filter(student => student.grade === 1)
-    .map(student => student.name);
-
-console.log("③ 1학년 학생:", firstGrade.join(", "));
+        output += "① 원의 넓이: " + circleArea(5).toFixed(2) + "\n\n";
 
 
-// ④ 심화 — 상품 재고 관리하기
-let products = [
-    { id: 1, name: "키보드", price: 50000, stock: 10 },
-    { id: 2, name: "마우스", price: 30000, stock: 0 },
-    { id: 3, name: "모니터", price: 200000, stock: 5 },
-    { id: 4, name: "헤드셋", price: 80000, stock: 0 }
-];
+        // ② 기본 — 60점 이상 점수와 평균 구하기
+        let scores = [95, 42, 88, 67, 55];
 
-// ① 총 재고 금액
-let total = products.reduce((sum, product) => {
-    return sum + (product.price * product.stock);
-}, 0);
+        let passed = scores.filter(score => score >= 60);
 
-// ② 재고가 0인 상품 이름
-let soldOut = products
-    .filter(product => product.stock === 0)
-    .map(product => product.name);
+        let count = passed.length;
+        let average = passed.reduce((sum, score) => sum + score, 0) / count;
 
-// ③ 가장 비싼 상품
-let expensive = products.reduce((max, product) => {
-    return product.price > max.price ? product : max;
-});
+        output += "② 60점 이상 점수: " + passed + "\n";
+        output += "60점 이상 인원수: " + count + "\n";
+        output += "평균: " + average + "\n\n";
 
-console.log("④ 총 재고 금액:", total);
-console.log("재고가 0인 상품:", soldOut.join(", "));
-console.log("가장 비싼 상품:", expensive.name);
-console.log("가장 비싼 상품 가격:", expensive.price);
+
+        // ③ 응용 — 1학년 학생 이름 출력하기
+        let students = [
+            { name: "김철수", grade: 1, score: 90 },
+            { name: "이영희", grade: 2, score: 85 },
+            { name: "박민수", grade: 1, score: 95 },
+            { name: "최유진", grade: 3, score: 80 }
+        ];
+
+        let firstGrade = students
+            .filter(student => student.grade === 1)
+            .map(student => student.name);
+
+        output += "③ 1학년 학생: " + firstGrade.join(", ") + "\n\n";
+
+
+        // ④ 심화 — 상품 재고 관리하기
+        let products = [
+            { id: 1, name: "키보드", price: 50000, stock: 10 },
+            { id: 2, name: "마우스", price: 30000, stock: 0 },
+            { id: 3, name: "모니터", price: 200000, stock: 5 },
+            { id: 4, name: "헤드셋", price: 80000, stock: 0 }
+        ];
+
+        // 총 재고 금액
+        let total = products.reduce((sum, product) => {
+            return sum + (product.price * product.stock);
+        }, 0);
+
+        // 재고가 0인 상품 이름
+        let soldOut = products
+            .filter(product => product.stock === 0)
+            .map(product => product.name);
+
+        // 가장 비싼 상품
+        let expensive = products.reduce((max, product) => {
+            return product.price > max.price ? product : max;
+        });
+
+        output += "④ 총 재고 금액: " + total.toLocaleString() + "원\n";
+        output += "재고가 0인 상품: " + soldOut.join(", ") + "\n";
+        output += "가장 비싼 상품: " + expensive.name + "\n";
+        output += "가격: " + expensive.price.toLocaleString() + "원";
+
+        document.getElementById("result").textContent = output;
+    </script>
+</body>
+</html>
